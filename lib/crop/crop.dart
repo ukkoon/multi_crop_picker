@@ -121,8 +121,8 @@ class _CropState extends State<Crop> with TickerProviderStateMixin {
   void _reCenterImage([bool animate = true]) {
     final sz = _key.currentContext!.size!;
     final s = widget.controller._scale * widget.controller._getMinScale();
-    final childWidgetSize =
-        (_childKey.currentContext?.findRenderObject() as RenderBox).size;
+    // final childWidgetSize =
+    //     (_childKey.currentContext?.findRenderObject() as RenderBox).size;
 
     double w, h;
     
@@ -426,7 +426,7 @@ class CropController extends ChangeNotifier {
   /// [window.devicePixelRatio] for the device, so specifying 1.0 (the default)
   /// will give you a 1:1 mapping between logical pixels and the output pixels
   /// in the image.
-  Future<ui.Image> crop({double pixelRatio = 1}) {
+  Future<ui.Image?> crop({double pixelRatio = 1}) {
     if (_cropCallback == null) {
       return Future.value(null);
     }

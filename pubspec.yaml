@@ -1,7 +1,7 @@
 name: multi_crop_picker
 description: instagrammable multi crop picker.
-publish_to: https://pub.dartlang.org
 repository: https://github.com/ukkoon/multi_crop_picker.git
+
 version: 0.0.1
 homepage:
 
