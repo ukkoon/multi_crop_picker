@@ -1,0 +1,25 @@
+name: multi_crop_picker
+description: instagrammable multi crop picker.
+publish_to: https://pub.dartlang.org
+repository: https://github.com/ukkoon/multi_crop_picker.git
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ">=2.15.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  photo_manager: ^1.3.10
+  provider: ^6.0.1
+  collision: ^0.0.3
+  vector_math: ^2.1.0
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter    
+  flutter_lints: ^1.0.0  
+
+flutter:

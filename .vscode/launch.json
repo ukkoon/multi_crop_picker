@@ -1,0 +1,54 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "조형원의 아이폰",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "00008101-000508CC26E0001E",
+            "args": [
+                "--no-sound-null-safety"
+            ]
+        },
+        {
+            "name": "iphone8",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "085C9F04-BA4F-4B66-BA76-B60983CAAD7F",
+            "args": [
+                "--no-sound-null-safety"
+            ]
+        },
+        {
+            "name": "scar_SE2_emulator",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "D425AD21-2F43-4D41-AB91-8733EDE9B5FA",
+            "args": [
+                "--no-sound-null-safety"
+            ]
+        },
+        {
+            "name": "scar_SE2_device",
+            "request": "launch",
+            "flutterMode": "release",
+            "type": "dart",
+            "deviceId": "00008030-000959E822E3802E",
+            "args": [
+                "--no-sound-null-safety"
+            ]
+        },
+        {
+            "name": "android_5554",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "emulator-5554",
+            "args": [
+                "--no-sound-null-safety"
+            ]
+        },
+    ]
+}
