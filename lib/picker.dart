@@ -571,7 +571,7 @@ class __SelectMediaPageState extends State<_SelectMediaPage> {
       for (int i = 0; i < medias.length; i++) {
         var img =
             await medias[i].crop!.controller.crop(pixelRatio: devicePixelRatio);
-        var byteData = await img.toByteData(format: ui.ImageByteFormat.png);
+        var byteData = await img?.toByteData(format: ui.ImageByteFormat.png);
         var buffer = byteData!.buffer.asUint8List();
 
         images.add(buffer);
