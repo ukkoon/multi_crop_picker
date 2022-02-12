@@ -2,6 +2,9 @@
 
 select & crop single or multiple image from gallery.
 
+<img src="https://github.com/ukkoon/multi_crop_picker/blob/master/image_1.png?raw=true" width="400"/>
+<img src="https://github.com/ukkoon/multi_crop_picker/blob/master/image_2.png?raw=true" width="400"/>
+
 
 ## Getting started
 
@@ -38,3 +41,4 @@ ios/Info.plist:
 
 At first, there were no plans to deploy, maybe so there are many shortcomings.
 if anyone ever uses it, please give me feedback and ratings.
+(crop featrue based on xclud/flutter_crop, gallery feture based on CaiJingLong/flutter_photo_manager)
