@@ -1,7 +1,7 @@
 name: multi_crop_picker
 description: instagrammable multi crop picker. this package do multiple image select, with ratio, length, grid(crossAxisCount), etc args. (crop featrue based on xclud/flutter_crop, gallery feture based on CaiJingLong/flutter_photo_manager)
 repository: https://github.com/ukkoon/multi_crop_picker.git
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/ukkoon/multi_crop_picker.git
 
 
