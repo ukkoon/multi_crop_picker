@@ -93,25 +93,16 @@ class _SelectMediaPage extends StatefulWidget {
 }
 
 class __SelectMediaPageState extends State<_SelectMediaPage> {
-  late ScrollController previewCtrl;
-  late ScrollController gridCtrl;
+  late ScrollController previewCtrl = ScrollController(initialScrollOffset: 0);
+  late ScrollController gridCtrl = ScrollController(initialScrollOffset: 0);
   late List<AssetPathEntity> albums;
   late BuildContext providerCtx;
-  late Future<InitData> _data;
+  late final Future<InitData> _data = fetchData();
   bool canLoad = true;
   bool isLoading = false;
 
   final animDuration = const Duration(milliseconds: 300);
-  late double previewHideRatio;
-
-  @override
-  void initState() {
-    super.initState();
-    _data = fetchData();
-    previewHideRatio = 1 - widget.previewShowingRatio;
-    previewCtrl = ScrollController(initialScrollOffset: 0);
-    gridCtrl = ScrollController(initialScrollOffset: 0);
-  }
+  late double previewHideRatio = 1 - widget.previewShowingRatio;
 
   @override
   Widget build(BuildContext context) {
