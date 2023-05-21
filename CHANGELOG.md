@@ -11,3 +11,6 @@ solve crop package warning.
 
 ## 0.0.4 
 write readme
+
+## 0.0.5
+unset pubspec repo/homepage url ext(.git), use late keyword instead of initState

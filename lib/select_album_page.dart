@@ -58,7 +58,7 @@ class SelectAlbumPage extends StatelessWidget {
                               List<AssetEntity> assets = await albums[index]
                                   .getAssetListRange(start: 0, end: 1);
                               Uint8List thumbnail =
-                                  (await assets[0].thumbData)!;
+                                  (await assets[0].thumbnailData)!;
                               return thumbnail;
                             })(),
                             builder: (context, snapshot) => snapshot.hasData
