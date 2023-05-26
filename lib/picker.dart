@@ -427,7 +427,7 @@ class __SelectMediaPageState extends State<_SelectMediaPage> {
     // Map<AssetPathEntity, List<AssetEntity>> albumMap = {};
 
     List<AssetPathEntity> albums = await PhotoManager.getAssetPathList();
-   
+
     // for (int i = 0; i < albums.length; i++) {
     //   albumMap.addAll({albums[i]: await albums[i].getSubPathList()});
     // }
@@ -461,7 +461,7 @@ class __SelectMediaPageState extends State<_SelectMediaPage> {
               e.typeInt,
               e.width,
               e.height,
-              e.thumbnailDataWithSize(const ThumbnailSize(200,200)),
+              e.thumbnailDataWithSize(const ThumbnailSize(200, 200)),
             ),
           )
           .toList(),
@@ -496,7 +496,9 @@ class __SelectMediaPageState extends State<_SelectMediaPage> {
 
       Completer completer = Completer();
 
-      media.thumbnailDataWithSize(const ThumbnailSize(4096, 4096)).then((value) {
+      media
+          .thumbnailDataWithSize(const ThumbnailSize(4096, 4096))
+          .then((value) {
         completer.complete(value);
         providerCtx.read<Album>().notifyListeners();
       });

@@ -1,10 +1,11 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:multi_crop_picker/models/album.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 class SelectAlbumPage extends StatelessWidget {
-  const SelectAlbumPage(
+  SelectAlbumPage(
       {required this.albums,
       required this.title,
       required this.backgroundColor,
@@ -13,6 +14,8 @@ class SelectAlbumPage extends StatelessWidget {
       : super(key: key);
 
   final List<AssetPathEntity> albums;
+  late Future<List<AlbumData>> _data = _fetchData;
+  
   final String title;
   final Color backgroundColor, textColor;
 
@@ -38,73 +41,89 @@ class SelectAlbumPage extends StatelessWidget {
             ),
             pinned: true,
           ),
-          SliverFillRemaining(
-              child: ListView.separated(
-            padding: const EdgeInsets.all(15),
-            shrinkWrap: true,
-            itemCount: albums.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop(albums[index]);
-                  },
-                  child: SizedBox(
-                    height: 80,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        FutureBuilder(
-                            future: (() async {
-                              List<AssetEntity> assets = await albums[index]
-                                  .getAssetListRange(start: 0, end: 1);
-                              Uint8List thumbnail =
-                                  (await assets[0].thumbnailData)!;
-                              return thumbnail;
-                            })(),
-                            builder: (context, snapshot) => snapshot.hasData
-                                ? Image.memory(
-                                    snapshot.data as Uint8List,
-                                    width: 80,
-                                    height: 80,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Container()),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        IntrinsicHeight(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                albums[index].name,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: textColor),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                albums[index].assetCount.toString(),
-                                style: TextStyle(
-                                    color: textColor.withOpacity(0.7)),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ));
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 30,
-              );
-            },
-          )),
+          FutureBuilder(
+            future: _data,
+            builder: (context, snapshot) => snapshot.hasData
+                ? SliverFillRemaining(
+                    child: ListView.separated(
+                    padding: const EdgeInsets.all(15),
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                          onTap: () {
+                            Navigator.of(context).pop(snapshot.data![index].album);
+                          },
+                          child: SizedBox(
+                            height: 80,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.memory(
+                                  snapshot.data![index].thumbnail,
+                                  width: 80,
+                                  height: 80,
+                                  fit: BoxFit.cover,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                IntrinsicHeight(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        snapshot.data![index].album.name,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: textColor),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        snapshot.data![index].count.toString(),
+                                        style: TextStyle(
+                                            color: textColor.withOpacity(0.7)),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ));
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: 30,
+                      );
+                    },
+                  ))
+                : const SliverFillRemaining(),
+          ),
         ]),
       ),
     );
   }
+
+  Future<List<AlbumData>> get _fetchData async {
+    var futures = albums.map((e) async {
+      List<AssetEntity> assets = await e.getAssetListRange(start: 0, end: 1);
+      Uint8List thumbnail = (await assets[0].thumbnailDataWithSize(const ThumbnailSize(200, 200)))!;
+      return AlbumData(e, await e.assetCountAsync, thumbnail);
+    }).toList();
+
+    List<AlbumData> results = await Future.wait(futures);
+
+    return results;
+  }
+}
+
+class AlbumData {
+  final AssetPathEntity album;
+  final int count;
+  final Uint8List thumbnail;
+
+  AlbumData(this.album, this.count, this.thumbnail);
 }

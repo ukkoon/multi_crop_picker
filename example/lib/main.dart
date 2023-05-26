@@ -44,9 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () async {
                   photos = await MultiCropPicker.selectMedia(context,
                       maxLength: 2,
-                      aspectRatio: 1.0,
-                      previewHeight: MediaQuery.of(context).size.height * 1 / 2,
-                      previewShowingRatio: 1 / 3,
+                      aspectRatio: 1.0,                      
+                      previewShowingRatio: 1.0,
                       textColor: Colors.white,
                       backgroundColor: Colors.brown,
                       tagColor: Colors.yellow,
@@ -56,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: const Text('get images')),
             if (photos != null)
-              ListView.builder(
+              Expanded(child: ListView.builder(
                   itemCount: photos!.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -65,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: MediaQuery.of(context).size.width,
                       child: Image.memory(photos![index]),
                     );
-                  })
+                  }))
           ],
         ),
       ),
